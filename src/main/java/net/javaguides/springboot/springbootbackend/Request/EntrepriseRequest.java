@@ -22,4 +22,5 @@ public class EntrepriseRequest {
 
     @JsonIgnore
     private List<UtilisateurRequest> utilisateurs;
+    
 }

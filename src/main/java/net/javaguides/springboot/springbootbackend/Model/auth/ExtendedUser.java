@@ -16,6 +16,7 @@ public class ExtendedUser implements User {
         super(username, password, authorities);
     }
 
+
     public ExtendedUser(String username, String password, Integer idEntreprise,
                         Collection<? extends GrantedAuthority> authorities) {
        super(username, password, authorities);
