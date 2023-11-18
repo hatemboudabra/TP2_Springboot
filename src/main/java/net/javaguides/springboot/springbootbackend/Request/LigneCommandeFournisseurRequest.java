@@ -31,17 +31,17 @@ public class LigneCommandeFournisseurRequest {
                 .build();
     }
 
-    public static LigneCommandeFournisseur toEntity(LigneCommandeFournisseurRequest request) {
-        if (request == null) {
+    public static LigneCommandeFournisseur toEntity(LigneCommandeFournisseurRequest ligneCommandeFournisseurRequest) {
+        if (ligneCommandeFournisseurRequest == null) {
             return null;
         }
 
         LigneCommandeFournisseur ligneCommandeFournisseur = new LigneCommandeFournisseur();
-        ligneCommandeFournisseur.setId(request.getId());
-        ligneCommandeFournisseur.setArticle(ArticleRequest.toEntity(request.getArticle()));
-        ligneCommandeFournisseur.setPrixUnitaire(request.getPrixUnitaire());
-        ligneCommandeFournisseur.setQuantite(request.getQuantite());
-        ligneCommandeFournisseur.setIdEntreprise(request.getIdEntreprise());
+        ligneCommandeFournisseur.setId(ligneCommandeFournisseurRequest.getId());
+        ligneCommandeFournisseur.setArticle(ArticleRequest.toEntity(ligneCommandeFournisseurRequest.getArticle()));
+        ligneCommandeFournisseur.setPrixUnitaire(ligneCommandeFournisseurRequest.getPrixUnitaire());
+        ligneCommandeFournisseur.setQuantite(ligneCommandeFournisseurRequest.getQuantite());
+        ligneCommandeFournisseur.setIdEntreprise(ligneCommandeFournisseurRequest.getIdEntreprise());
         return ligneCommandeFournisseur;
     }
 

@@ -7,22 +7,22 @@ import net.javaguides.springboot.springbootbackend.Model.Roles;
 
 @Data
 @Builder
-public class RoleRequest {
+public class RolesRequest {
     private Integer id;
     private String roleName;
     @JsonIgnore
     private UtilisateurRequest utilisateur;
-    public static RoleRequest fromEntity(Roles roles) {
+    public static RolesRequest fromEntity(Roles roles) {
         if (roles == null) {
             return null;
         }
-        return RoleRequest.builder()
+        return RolesRequest.builder()
                 .id(roles.getId())
                 .roleName(roles.getRoleName())
                 .build();
     }
 
-    public static Roles toEntity(RoleRequest roleRequest) {
+    public static Roles toEntity(RolesRequest roleRequest) {
         if (roleRequest == null) {
             return null;
         }

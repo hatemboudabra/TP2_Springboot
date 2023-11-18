@@ -9,6 +9,7 @@ import net.javaguides.springboot.springbootbackend.Repository.RolesRepository;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Builder
 @Data
@@ -22,7 +23,8 @@ public class UtilisateurRequest {
     private AdresseRequest adresse;
     private String photo;
     private EntrepriseRequest entreprise;
-    private List<RoleRequest> roles;
+    private List<RolesRequest> roles;
+
     public static UtilisateurRequest fromEntity(Utilisateur utilisateur) {
         if (utilisateur == null) {
             return null;
@@ -41,8 +43,8 @@ public class UtilisateurRequest {
                 .roles(
                         utilisateur.getRoles() != null ?
                                 utilisateur.getRoles().stream()
-                                        .map(RolesRepository::fromEntity)
-                                        .collect(Collections.toList()) : null
+                                        .map(RolesRequest::fromEntity)
+                                        .collect(Collectors.toList()) : null
                 )
                 .build();
     }
