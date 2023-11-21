@@ -37,20 +37,20 @@ public class ArticleRequest {
                 .build();
     }
 
-    public static Article toEntity(ArticleRequest articleDto) {
-        if (articleDto == null) {
+    public static Article toEntity(ArticleRequest articleRequest) {
+        if (articleRequest == null) {
             return null;
         }
         Article article = new Article();
-        article.setId(articleDto.getId());
-        article.setCodeArticle(articleDto.getCodeArticle());
-        article.setDesignation(articleDto.getDesignation());
-        article.setPhoto(articleDto.getPhoto());
-        article.setPrixUnitaireHt(articleDto.getPrixUnitaireHt());
-        article.setPrixUnitaireTtc(articleDto.getPrixUnitaireTtc());
-        article.setTauxTva(articleDto.getTauxTva());
-        article.setIdEntreprise(articleDto.getIdEntreprise());
-        article.setCategory(CategoryRequest.toEntity(articleDto.getCategory()));
+        article.setId(articleRequest.getId());
+        article.setCodeArticle(articleRequest.getCodeArticle());
+        article.setDesignation(articleRequest.getDesignation());
+        article.setPhoto(articleRequest.getPhoto());
+        article.setPrixUnitaireHt(articleRequest.getPrixUnitaireHt());
+        article.setPrixUnitaireTtc(articleRequest.getPrixUnitaireTtc());
+        article.setTauxTva(articleRequest.getTauxTva());
+        article.setIdEntreprise(articleRequest.getIdEntreprise());
+        article.setCategory(CategoryRequest.toEntity(articleRequest.getCategory()));
         return article;
     }
 

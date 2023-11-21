@@ -40,7 +40,7 @@ public interface ArticleApi {
 
     @GetMapping(value = APP_ROOT + "/articles/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des articles", notes = "Cette methode permet de chercher et renvoyer la liste des articles qui existent "
-            + "dans la BDD", responseContainer = "List<ArticleDto>")
+            + "dans la BDD", responseContainer = "List<ArticleRequest>")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La liste des article / Une liste vide")
     })

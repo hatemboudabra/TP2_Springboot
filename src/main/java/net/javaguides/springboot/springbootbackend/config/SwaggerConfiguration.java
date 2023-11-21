@@ -35,7 +35,7 @@ public class SwaggerConfiguration {
                 .securitySchemes(Collections.singletonList(apiKey()))
                 .useDefaultResponseMessages(false)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("hatem.gestiondestock"))
+                .apis(RequestHandlerSelectors.basePackage("net.javaguides.springboot.springbootbackend"))
                 .paths(PathSelectors.any())
                 .build();
     }
