@@ -35,7 +35,7 @@ public class SwaggerConfiguration {
                 .securitySchemes(Collections.singletonList(apiKey()))
                 .useDefaultResponseMessages(false)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.bouali.gestiondestock"))
+                .apis(RequestHandlerSelectors.basePackage("hatem.gestiondestock"))
                 .paths(PathSelectors.any())
                 .build();
     }
