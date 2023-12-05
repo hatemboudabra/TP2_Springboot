@@ -15,18 +15,25 @@ import net.javaguides.springboot.springbootbackend.validator.EntrepriseValidator
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Transactional(rollbackOn = Exception.class)
 @Service
 @Slf4j
 public class EntrepriseServiceImpl implements EntrepriseService {
-    @Autowired
     EntrepriseRepository entrepriseRepository;
     UtilisateurService utilisateurService;
     RolesRepository rolesRepository;
 
+    @Autowired
+    public EntrepriseServiceImpl(EntrepriseRepository entrepriseRepository, UtilisateurService utilisateurService,
+                                 RolesRepository rolesRepository) {
+        this.entrepriseRepository = entrepriseRepository;
+        this.utilisateurService = utilisateurService;
+        this.rolesRepository = rolesRepository;
+    }
 
     @Override
     public EntrepriseRequest save(EntrepriseRequest entrepriseRequest) {

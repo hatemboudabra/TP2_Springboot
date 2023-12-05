@@ -15,7 +15,7 @@ import java.io.InputStream;
 @Service("articleStrategy")
 @Slf4j
 public class SaveArticlePhoto implements Strategy<ArticleRequest>{
-    private FlickrService flickrService;
+   private FlickrService flickrService;
     private ArticleService articleService;
 
     @Autowired
@@ -34,4 +34,6 @@ public class SaveArticlePhoto implements Strategy<ArticleRequest>{
         return articleService.save(articleRequest);
 
     }
+
+
 }

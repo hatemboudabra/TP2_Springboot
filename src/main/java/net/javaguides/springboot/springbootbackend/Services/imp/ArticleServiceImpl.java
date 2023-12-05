@@ -28,12 +28,20 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class ArticleServiceImpl implements ArticleService {
-    @Autowired
     private ArticleRepository articleRepository;
     private LigneVenteRepository venteRepository;
     private LigneCommandeFournisseurRepository commandeFournisseurRepository;
     private LigneCommandeClientRepository commandeClientRepository;
-
+    @Autowired
+    public ArticleServiceImpl(
+            ArticleRepository articleRepository,
+            LigneVenteRepository venteRepository, LigneCommandeFournisseurRepository commandeFournisseurRepository,
+            LigneCommandeClientRepository commandeClientRepository) {
+        this.articleRepository = articleRepository;
+        this.venteRepository = venteRepository;
+        this.commandeFournisseurRepository = commandeFournisseurRepository;
+        this.commandeClientRepository = commandeClientRepository;
+    }
     @Override
     public ArticleRequest save(ArticleRequest articleRequest) {
         List<String> errors = ArticleValidator.validate(articleRequest);

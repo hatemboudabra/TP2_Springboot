@@ -35,12 +35,21 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class CommandeClientServiceImpl implements CommandeClientService {
-    @Autowired
     CommandeClientRepository commandeClientRepository;
      LigneCommandeClientRepository ligneCommandeClientRepository;
      ClientRepository clientRepository;
      ArticleRepository articleRepository;
      MvtStkService mvtStkService;
+    @Autowired
+    public CommandeClientServiceImpl(CommandeClientRepository commandeClientRepository,
+                                     ClientRepository clientRepository, ArticleRepository articleRepository, LigneCommandeClientRepository ligneCommandeClientRepository,
+                                     MvtStkService mvtStkService) {
+        this.commandeClientRepository = commandeClientRepository;
+        this.ligneCommandeClientRepository = ligneCommandeClientRepository;
+        this.clientRepository = clientRepository;
+        this.articleRepository = articleRepository;
+        this.mvtStkService = mvtStkService;
+    }
     @Override
     public CommandeClientRequest save(CommandeClientRequest commandeClientRequest) {
         List<String> errors = CommandeClientValidator.validate(commandeClientRequest);
@@ -55,7 +64,7 @@ public class CommandeClientServiceImpl implements CommandeClientService {
         }
 
         Optional<Client> client = clientRepository.findById(commandeClientRequest.getClient().getId());
-        if (!client.isPresent()) {
+        if (client.isEmpty()) {
             log.warn("Client with ID {} was not found in the DB", commandeClientRequest.getClient().getId());
             throw new EntityNotFoundException("Aucun client avec l'ID" + commandeClientRequest.getClient().getId() + " n'a ete trouve dans la BDD",
                     ErrorCodes.CLIENT_NOT_FOUND);
@@ -67,7 +76,7 @@ public class CommandeClientServiceImpl implements CommandeClientService {
             commandeClientRequest.getLigneCommandeClients().forEach(ligCmdClt -> {
                 if (ligCmdClt.getArticle() != null) {
                     Optional<Article> article = articleRepository.findById(ligCmdClt.getArticle().getId());
-                    if (!article.isPresent()) {
+                    if (article.isEmpty()) {
                         articleErrors.add("L'article avec l'ID " + ligCmdClt.getArticle().getId() + " n'existe pas");
                     }
                 } else {
@@ -167,7 +176,7 @@ public class CommandeClientServiceImpl implements CommandeClientService {
     }
     private Optional<LigneCommandeClient> findLigneCommandeClient(Integer idLigneCommande) {
         Optional<LigneCommandeClient> ligneCommandeClientOptional = ligneCommandeClientRepository.findById(idLigneCommande);
-        if (!ligneCommandeClientOptional.isPresent()) {
+        if (ligneCommandeClientOptional.isEmpty()) {
             throw new EntityNotFoundException(
                     "Aucune ligne commande client n'a ete trouve avec l'ID " + idLigneCommande, ErrorCodes.COMMANDE_CLIENT_NOT_FOUND);
         }
@@ -190,7 +199,7 @@ public class CommandeClientServiceImpl implements CommandeClientService {
         }
         CommandeClientRequest commandeClient = checkEtatCommande(idCommande);
         Optional<Client> clientOptional = clientRepository.findById(idClient);
-        if (!clientOptional.isPresent()) {
+        if (clientOptional.isEmpty()) {
             throw new EntityNotFoundException(
                     "Aucun client n'a ete trouve avec l'ID " + idClient, ErrorCodes.CLIENT_NOT_FOUND);
         }
@@ -213,7 +222,7 @@ public class CommandeClientServiceImpl implements CommandeClientService {
         Optional<LigneCommandeClient> ligneCommandeClient = findLigneCommandeClient(idLigneCommande);
 
         Optional<Article> articleOptional = articleRepository.findById(idArticle);
-        if (!articleOptional.isPresent()) {
+        if (articleOptional.isEmpty()) {
             throw new EntityNotFoundException(
                     "Aucune article n'a ete trouve avec l'ID " + idArticle, ErrorCodes.ARTICLE_NOT_FOUND);
         }

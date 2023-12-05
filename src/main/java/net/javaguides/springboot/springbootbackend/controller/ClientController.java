@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 @RestController
 public class ClientController implements ClientApi {
+     private ClientService clientService;
     @Autowired
-    ClientService clientService;
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
+    }
     @Override
     public ClientRequest save(ClientRequest clientRequest) {
         return clientService.save(clientRequest);

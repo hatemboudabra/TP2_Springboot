@@ -10,8 +10,11 @@ import java.math.BigDecimal;
 import java.util.List;
 @RestController
 public class MvtStkController implements MvtStkApi {
-    @Autowired
     MvtStkService mvtStkService;
+    @Autowired
+    public MvtStkController(MvtStkService mvtStkService) {
+        this.mvtStkService = mvtStkService;
+    }
     @Override
     public BigDecimal stockReelArticle(Integer idArticle) {
         return mvtStkService.stockReelArticle(idArticle);

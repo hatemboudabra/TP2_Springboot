@@ -11,10 +11,16 @@ import java.io.IOException;
 
 @RestController
 public class PhotoController implements PhotoApi {
-    @Autowired
     StrategyPhotoContext strategyPhotoContext;
+
+    @Autowired
+    public PhotoController(StrategyPhotoContext strategyPhotoContext) {
+        this.strategyPhotoContext = strategyPhotoContext;
+    }
     @Override
     public Object savePhoto(String context, Integer id, MultipartFile photo, String title) throws IOException, FlickrException {
         return strategyPhotoContext.savePhoto(context,id,photo.getInputStream(),title);
     }
+
+
 }

@@ -33,11 +33,18 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class VentesServiceImpl implements VentesService {
-    @Autowired
     ArticleRepository articleRepository;
     VentesRepository ventesRepository;
     LigneVenteRepository ligneVenteRepository;
     MvtStkService mvtStkService;
+    @Autowired
+    public VentesServiceImpl(ArticleRepository articleRepository, VentesRepository ventesRepository,
+                             LigneVenteRepository ligneVenteRepository, MvtStkService mvtStkService) {
+        this.articleRepository = articleRepository;
+        this.ventesRepository = ventesRepository;
+        this.ligneVenteRepository = ligneVenteRepository;
+        this.mvtStkService = mvtStkService;
+    }
     @Override
     public VentesRequest save(VentesRequest ventesRequest) {
         List<String> errors = VentesValidator.validate(ventesRequest);
@@ -50,7 +57,7 @@ public class VentesServiceImpl implements VentesService {
 
         ventesRequest.getLigneVentes().forEach(ligneVenteRequest -> {
             Optional<Article> article = articleRepository.findById(ligneVenteRequest.getArticle().getId());
-            if (!article.isPresent()) {
+            if (article.isEmpty()) {
                 articleErrors.add("Aucun article avec l'ID " + ligneVenteRequest.getArticle().getId() + " n'a ete trouve dans la BDD");
             }
         });

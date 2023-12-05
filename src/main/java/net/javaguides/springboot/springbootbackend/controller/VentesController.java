@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 @RestController
 public class VentesController implements VentesApi {
+
+     private VentesService ventesService;
     @Autowired
-    VentesService ventesService;
+    public VentesController(VentesService ventesService) {
+        this.ventesService = ventesService;
+    }
     @Override
     public VentesRequest save(VentesRequest ventesRequest) {
         return ventesService.save(ventesRequest);

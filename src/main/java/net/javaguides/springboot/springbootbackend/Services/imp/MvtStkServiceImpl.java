@@ -19,9 +19,14 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class MvtStkServiceImpl implements MvtStkService {
-    @Autowired
     MvtStkRepository mvtStkRepository;
     ArticleService articleService;
+
+    @Autowired
+    public MvtStkServiceImpl(MvtStkRepository repository, ArticleService articleService) {
+        this.mvtStkRepository = mvtStkRepository;
+        this.articleService = articleService;
+    }
     @Override
     public BigDecimal stockReelArticle(Integer idArticle) {
         if (idArticle == null) {

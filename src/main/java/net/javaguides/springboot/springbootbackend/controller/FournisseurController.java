@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 @RestController
 public class FournisseurController implements FournisseurApi {
-    @Autowired
+
     FournisseurService fournisseurService;
+
+    @Autowired
+    public FournisseurController(FournisseurService fournisseurService) {
+        this.fournisseurService = fournisseurService;
+    }
     @Override
     public FournisseurRequest save(FournisseurRequest fournisseurRequest) {
         return fournisseurService.save(fournisseurRequest);

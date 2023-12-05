@@ -13,8 +13,13 @@ import java.util.List;
 
 @RestController
 public class CommandeFournisseurController implements CommandeFournisseurApi {
-    @Autowired
     CommandeFournisseurService commandeFournisseurService;
+    @Autowired
+    public CommandeFournisseurController(CommandeFournisseurService commandeFournisseurService) {
+        this.commandeFournisseurService = commandeFournisseurService;
+    }
+
+
     @Override
     public CommandeFournisseurRequest save(CommandeFournisseurRequest commandeFournisseurRequest) {
         return commandeFournisseurService.save(commandeFournisseurRequest);

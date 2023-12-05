@@ -15,9 +15,13 @@ import java.io.InputStream;
 @Service("entrepriseStrategy")
 @Slf4j
 public class SaveEntreprisePhoto implements Strategy<EntrepriseRequest> {
-    @Autowired
     FlickrService flickrService;
     EntrepriseService entrepriseService;
+    @Autowired
+    public SaveEntreprisePhoto(FlickrService flickrService, EntrepriseService entrepriseService) {
+        this.flickrService = flickrService;
+        this.entrepriseService = entrepriseService;
+    }
     @Override
     public EntrepriseRequest savePhoto(Integer id, InputStream photo, String titre) throws FlickrException {
         EntrepriseRequest entrepriseRequest = entrepriseService.findById(id);

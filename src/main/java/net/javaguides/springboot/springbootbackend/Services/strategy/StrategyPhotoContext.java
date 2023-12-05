@@ -19,6 +19,7 @@ public class StrategyPhotoContext {
 
     @Autowired
     public StrategyPhotoContext(BeanFactory beanFactory) {
+
         this.beanFactory = beanFactory;
     }
 

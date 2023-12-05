@@ -35,12 +35,21 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class CommandeFournisseurServiceImpl implements CommandeFournisseurService {
-    @Autowired
     CommandeFournisseurRepository commandeFournisseurRepository;
     LigneCommandeFournisseurRepository ligneCommandeFournisseurRepository;
     FournisseurRepository fournisseurRepository;
     ArticleRepository articleRepository;
     MvtStkService mvtStkService;
+    @Autowired
+    public CommandeFournisseurServiceImpl(CommandeFournisseurRepository commandeFournisseurRepository,
+                                          FournisseurRepository fournisseurRepository, ArticleRepository articleRepository,
+                                          LigneCommandeFournisseurRepository ligneCommandeFournisseurRepository, MvtStkService mvtStkService) {
+        this.commandeFournisseurRepository = commandeFournisseurRepository;
+        this.ligneCommandeFournisseurRepository = ligneCommandeFournisseurRepository;
+        this.fournisseurRepository = fournisseurRepository;
+        this.articleRepository = articleRepository;
+        this.mvtStkService = mvtStkService;
+    }
     @Override
     public CommandeFournisseurRequest save(CommandeFournisseurRequest commandeFournisseurRequest) {
         List<String> errors = CommandeFournisseurValidator.validate(commandeFournisseurRequest);
@@ -55,7 +64,7 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
         }
 
         Optional<Fournisseur> fournisseur = fournisseurRepository.findById(commandeFournisseurRequest.getFournisseur().getId());
-        if (!fournisseur.isPresent()) {
+        if (fournisseur.isEmpty()) {
             log.warn("Fournisseur with ID {} was not found in the DB", commandeFournisseurRequest.getFournisseur().getId());
             throw new EntityNotFoundException("Aucun fournisseur avec l'ID" + commandeFournisseurRequest.getFournisseur().getId() + " n'a ete trouve dans la BDD",
                     ErrorCodes.FOURNISSEUR_NOT_FOUND);
@@ -67,7 +76,7 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
             commandeFournisseurRequest.getLigneCommandeFournisseurs().forEach(ligCmdFrs -> {
                 if (ligCmdFrs.getArticle() != null) {
                     Optional<Article> article = articleRepository.findById(ligCmdFrs.getArticle().getId());
-                    if (!article.isPresent()) {
+                    if (article.isEmpty()) {
                         articleErrors.add("L'article avec l'ID " + ligCmdFrs.getArticle().getId() + " n'existe pas");
                     }
                 } else {
@@ -145,7 +154,7 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
     }
     private Optional<LigneCommandeFournisseur> findLigneCommandeFournisseur(Integer idLigneCommande) {
         Optional<LigneCommandeFournisseur> ligneCommandeFournisseurOptional = ligneCommandeFournisseurRepository.findById(idLigneCommande);
-        if (!ligneCommandeFournisseurOptional.isPresent()) {
+        if (ligneCommandeFournisseurOptional.isEmpty()) {
             throw new EntityNotFoundException(
                     "Aucune ligne commande fournisseur n'a ete trouve avec l'ID " + idLigneCommande, ErrorCodes.COMMANDE_FOURNISSEUR_NOT_FOUND);
         }
@@ -162,7 +171,7 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
         }
         CommandeFournisseurRequest commandeFournisseurRequest = checkEtatCommande(idCommande);
         Optional<Fournisseur> fournisseurOptional = fournisseurRepository.findById(idFournisseur);
-        if (!fournisseurOptional.isPresent()) {
+        if (fournisseurOptional.isEmpty()) {
             throw new EntityNotFoundException(
                     "Aucun commandeFournisseurRequestfournisseur n'a ete trouve avec l'ID " + idFournisseur, ErrorCodes.FOURNISSEUR_NOT_FOUND);
         }
@@ -184,7 +193,7 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
         Optional<LigneCommandeFournisseur> ligneCommandeFournisseur = findLigneCommandeFournisseur(idLigneCommande);
 
         Optional<Article> articleOptional = articleRepository.findById(idArticle);
-        if (!articleOptional.isPresent()) {
+        if (articleOptional.isEmpty()) {
             throw new EntityNotFoundException(
                     "Aucune article n'a ete trouve avec l'ID " + idArticle, ErrorCodes.ARTICLE_NOT_FOUND);
         }

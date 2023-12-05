@@ -24,11 +24,15 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class UtilisateurServiceImpl implements UtilisateurService {
-    @Autowired
      UtilisateurRepository utilisateurRepository;
-    @Autowired
-
     PasswordEncoder passwordEncoder;
+    @Autowired
+    public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository,
+                                  PasswordEncoder passwordEncoder) {
+        this.utilisateurRepository = utilisateurRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @Override
     public UtilisateurRequest save(UtilisateurRequest utilisateurRequest) {
         List<String> errors = UtilisateurValidator.validate(utilisateurRequest);
@@ -103,7 +107,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     public UtilisateurRequest changerMotDePasse(ChangerMotDePasseUtilisateurRequest changerMotDePasseUtilisateurRequest) {
         validate(changerMotDePasseUtilisateurRequest);
         Optional<Utilisateur> utilisateurOptional = utilisateurRepository.findById(changerMotDePasseUtilisateurRequest.getId());
-        if (utilisateurOptional.isPresent())  {
+        if (utilisateurOptional.isEmpty())  {
             log.warn("Aucun utilisateur n'a ete trouve avec l'ID " + changerMotDePasseUtilisateurRequest.getId());
             throw new EntityNotFoundException("Aucun utilisateur n'a ete trouve avec l'ID " + changerMotDePasseUtilisateurRequest.getId(), ErrorCodes.UTILISATEUR_NOT_FOUND);
         }

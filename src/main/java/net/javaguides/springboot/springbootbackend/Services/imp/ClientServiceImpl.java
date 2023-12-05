@@ -20,9 +20,15 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class ClientServiceImpl implements ClientService {
-    @Autowired
+
     ClientRepository clientRepository;
     CommandeClientRepository commandeClientRepository;
+
+    @Autowired
+    public ClientServiceImpl(ClientRepository clientRepository, CommandeClientRepository commandeClientRepository) {
+        this.clientRepository = clientRepository;
+        this.commandeClientRepository = commandeClientRepository;
+    }
     @Override
     public ClientRequest save(ClientRequest clientRequest) {
         List<String> errors = ClientValidator.validate(clientRequest);

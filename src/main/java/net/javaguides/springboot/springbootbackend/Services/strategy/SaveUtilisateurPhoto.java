@@ -35,4 +35,6 @@ public class SaveUtilisateurPhoto implements Strategy<UtilisateurRequest>{
         return utilisateurService.save(utilisateurRequest);
 
     }
+
+
 }

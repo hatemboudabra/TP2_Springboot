@@ -13,8 +13,11 @@ import java.math.BigDecimal;
 import java.util.List;
 @RestController
 public class CommandeClientController implements CommandeClientApi {
+   private CommandeClientService commandeClientService;
     @Autowired
-    CommandeClientService commandeClientService;
+    public CommandeClientController(CommandeClientService commandeClientService) {
+        this.commandeClientService = commandeClientService;
+    }
     @Override
     public ResponseEntity<CommandeClientRequest> save(CommandeClientRequest commandeClientRequest) {
         return ResponseEntity.ok(commandeClientService.save(commandeClientRequest));

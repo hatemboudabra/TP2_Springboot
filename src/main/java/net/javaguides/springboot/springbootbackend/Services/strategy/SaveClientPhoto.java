@@ -15,9 +15,13 @@ import java.io.InputStream;
 @Service("clientStrategy")
 @Slf4j
 public class SaveClientPhoto implements Strategy<ClientRequest> {
-    @Autowired
     FlickrService flickrService;
     ClientService clientService;
+    @Autowired
+    public SaveClientPhoto(FlickrService flickrService, ClientService clientService) {
+        this.flickrService = flickrService;
+        this.clientService = clientService;
+    }
     @Override
     public ClientRequest savePhoto(Integer id, InputStream photo, String titre) throws FlickrException {
         ClientRequest clientRequest= clientService.findById(id);

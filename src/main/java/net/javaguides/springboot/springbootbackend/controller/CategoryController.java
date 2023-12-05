@@ -10,8 +10,11 @@ import java.util.List;
 @RestController
 
 public class CategoryController implements CategoryApi {
+    private CategoryService categoryService;
     @Autowired
-    CategoryService categoryService;
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
     @Override
     public CategoryRequest save(CategoryRequest categoryRequest) {
         return categoryService.save(categoryRequest);

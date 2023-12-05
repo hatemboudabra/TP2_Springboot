@@ -21,9 +21,15 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class FournisseurServiceImpl implements FournisseurService {
-    @Autowired
+
     FournisseurRepository fournisseurRepository;
      CommandeFournisseurRepository commandeFournisseurRepository;
+    @Autowired
+    public FournisseurServiceImpl(FournisseurRepository fournisseurRepository,
+                                  CommandeFournisseurRepository commandeFournisseurRepository) {
+        this.fournisseurRepository = fournisseurRepository;
+        this.commandeFournisseurRepository = commandeFournisseurRepository;
+    }
     @Override
     public FournisseurRequest save(FournisseurRequest fournisseurRequest) {
         List<String> errors = FournisseurValidator.validate(fournisseurRequest);
