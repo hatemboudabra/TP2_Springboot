@@ -23,9 +23,9 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class EntrepriseServiceImpl implements EntrepriseService {
-    EntrepriseRepository entrepriseRepository;
-    UtilisateurService utilisateurService;
-    RolesRepository rolesRepository;
+    private EntrepriseRepository entrepriseRepository;
+    private UtilisateurService utilisateurService;
+    private RolesRepository rolesRepository;
 
     @Autowired
     public EntrepriseServiceImpl(EntrepriseRepository entrepriseRepository, UtilisateurService utilisateurService,

@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ClientServiceImpl implements ClientService {
 
-    ClientRepository clientRepository;
-    CommandeClientRepository commandeClientRepository;
+     private ClientRepository clientRepository;
+    private CommandeClientRepository commandeClientRepository;
 
     @Autowired
     public ClientServiceImpl(ClientRepository clientRepository, CommandeClientRepository commandeClientRepository) {

@@ -24,8 +24,8 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class UtilisateurServiceImpl implements UtilisateurService {
-     UtilisateurRepository utilisateurRepository;
-    PasswordEncoder passwordEncoder;
+    private UtilisateurRepository utilisateurRepository;
+    private PasswordEncoder passwordEncoder;
     @Autowired
     public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository,
                                   PasswordEncoder passwordEncoder) {

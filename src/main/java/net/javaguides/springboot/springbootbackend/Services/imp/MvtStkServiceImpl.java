@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class MvtStkServiceImpl implements MvtStkService {
-    MvtStkRepository mvtStkRepository;
-    ArticleService articleService;
+    private MvtStkRepository mvtStkRepository;
+    private ArticleService articleService;
 
     @Autowired
     public MvtStkServiceImpl(MvtStkRepository repository, ArticleService articleService) {

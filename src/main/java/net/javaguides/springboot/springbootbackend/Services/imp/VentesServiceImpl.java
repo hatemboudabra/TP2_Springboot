@@ -33,10 +33,10 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class VentesServiceImpl implements VentesService {
-    ArticleRepository articleRepository;
-    VentesRepository ventesRepository;
-    LigneVenteRepository ligneVenteRepository;
-    MvtStkService mvtStkService;
+     private ArticleRepository articleRepository;
+     private VentesRepository ventesRepository;
+     private LigneVenteRepository ligneVenteRepository;
+     private MvtStkService mvtStkService;
     @Autowired
     public VentesServiceImpl(ArticleRepository articleRepository, VentesRepository ventesRepository,
                              LigneVenteRepository ligneVenteRepository, MvtStkService mvtStkService) {

@@ -35,11 +35,11 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class CommandeClientServiceImpl implements CommandeClientService {
-    CommandeClientRepository commandeClientRepository;
-     LigneCommandeClientRepository ligneCommandeClientRepository;
-     ClientRepository clientRepository;
-     ArticleRepository articleRepository;
-     MvtStkService mvtStkService;
+    private CommandeClientRepository commandeClientRepository;
+   private   LigneCommandeClientRepository ligneCommandeClientRepository;
+   private   ClientRepository clientRepository;
+   private   ArticleRepository articleRepository;
+   private   MvtStkService mvtStkService;
     @Autowired
     public CommandeClientServiceImpl(CommandeClientRepository commandeClientRepository,
                                      ClientRepository clientRepository, ArticleRepository articleRepository, LigneCommandeClientRepository ligneCommandeClientRepository,

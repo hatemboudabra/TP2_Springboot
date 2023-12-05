@@ -22,8 +22,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class FournisseurServiceImpl implements FournisseurService {
 
-    FournisseurRepository fournisseurRepository;
-     CommandeFournisseurRepository commandeFournisseurRepository;
+    private FournisseurRepository fournisseurRepository;
+    private CommandeFournisseurRepository commandeFournisseurRepository;
     @Autowired
     public FournisseurServiceImpl(FournisseurRepository fournisseurRepository,
                                   CommandeFournisseurRepository commandeFournisseurRepository) {

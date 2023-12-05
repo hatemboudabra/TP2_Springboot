@@ -35,11 +35,11 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class CommandeFournisseurServiceImpl implements CommandeFournisseurService {
-    CommandeFournisseurRepository commandeFournisseurRepository;
-    LigneCommandeFournisseurRepository ligneCommandeFournisseurRepository;
-    FournisseurRepository fournisseurRepository;
-    ArticleRepository articleRepository;
-    MvtStkService mvtStkService;
+    private CommandeFournisseurRepository commandeFournisseurRepository;
+    private LigneCommandeFournisseurRepository ligneCommandeFournisseurRepository;
+    private FournisseurRepository fournisseurRepository;
+    private ArticleRepository articleRepository;
+    private MvtStkService mvtStkService;
     @Autowired
     public CommandeFournisseurServiceImpl(CommandeFournisseurRepository commandeFournisseurRepository,
                                           FournisseurRepository fournisseurRepository, ArticleRepository articleRepository,
